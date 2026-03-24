@@ -1,6 +1,6 @@
 # Davidious AI Code Lab Trainer
 
-## AI-Powered Coding Training and Evaluation System 
+## AI Trainer for Coding, Tracking and Evaluating progress
 
 ### AI coding lab with task generation, sandbox code execution, evaluation, progress tracking, and timed interview simulation. 
 
