@@ -27,41 +27,49 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>Welcome Back</h1>
-        {error && <div className={styles.error}>{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="email">Email</label>
-            <input
-              className={styles.input}
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="password">Password</label>
-            <input
-              className={styles.input}
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button className={styles.submitBtn} type="submit" disabled={isLoading}>
-            {isLoading ? 'Signing in...' : 'Sign in'}
-          </button>
-        </form>
-        <p className={styles.linkText}>
-          Don't have an account? <Link to="/register" className={styles.link}>Sign up</Link>
-        </p>
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Welcome back</h1>
+        <p className={styles.subtitle}>Enter your details to access your account.</p>
       </div>
+      
+      {error && <div className={styles.error}>{error}</div>}
+      
+      <form onSubmit={handleSubmit}>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="email">Email</label>
+          <input
+            className={styles.input}
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="password">Password</label>
+          <input
+            className={styles.input}
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        
+        <button className={styles.submitBtn} type="submit" disabled={isLoading}>
+          {isLoading ? 'Signing in...' : 'Sign in'}
+        </button>
+      </form>
+      
+      <p className={styles.linkText}>
+        Don't have an account? <Link to="/register" className={styles.link}>Sign up</Link>
+      </p>
     </div>
   );
 };

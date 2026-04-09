@@ -28,52 +28,61 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>Create Account</h1>
-        {error && <div className={styles.error}>{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="name">Name</label>
-            <input
-              className={styles.input}
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="email">Email</label>
-            <input
-              className={styles.input}
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="password">Password</label>
-            <input
-              className={styles.input}
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button className={styles.submitBtn} type="submit" disabled={isLoading}>
-            {isLoading ? 'Creating account...' : 'Sign up'}
-          </button>
-        </form>
-        <p className={styles.linkText}>
-          Already have an account? <Link to="/login" className={styles.link}>Sign in</Link>
-        </p>
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Join Davidious</h1>
+        <p className={styles.subtitle}>Create your AI Code Lab account.</p>
       </div>
+      
+      {error && <div className={styles.error}>{error}</div>}
+      
+      <form onSubmit={handleSubmit}>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="name">Full name <span style={{ color: '#52525b', fontWeight: 'normal' }}>(optional)</span></label>
+          <input
+            className={styles.input}
+            id="name"
+            type="text"
+            placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="email">Email</label>
+          <input
+            className={styles.input}
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="password">Password</label>
+          <input
+            className={styles.input}
+            id="password"
+            type="password"
+            placeholder="At least 6 characters"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        
+        <button className={styles.submitBtn} type="submit" disabled={isLoading}>
+          {isLoading ? 'Creating account...' : 'Create account'}
+        </button>
+      </form>
+      
+      <p className={styles.linkText}>
+        Already have an account? <Link to="/login" className={styles.link}>Log in</Link>
+      </p>
     </div>
   );
 };
