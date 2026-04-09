@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import styles from './Register.module.css';
+import { useAuth } from '../context/AuthContext';
+import { sharedStyles as styles } from '../styles/shared';
 
-export const Register: React.FC = () => {
-  const [name, setName] = useState('');
+export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { register } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,10 +17,10 @@ export const Register: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await register({ name, email, password });
+      await login({ email, password });
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to register. Please try again.');
+      setError(err.response?.data?.detail || 'Failed to login. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }
@@ -29,26 +28,14 @@ export const Register: React.FC = () => {
 
   return (
     <div className={styles.card}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Join Davidious</h1>
-        <p className={styles.subtitle}>Create your AI Code Lab account.</p>
+      <div className={styles.cardHeader}>
+        <h1 className={styles.cardTitle}>Welcome back</h1>
+        <p className={styles.cardSubtitle}>Enter your details to access your account.</p>
       </div>
-      
+
       {error && <div className={styles.error}>{error}</div>}
-      
+
       <form onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="name">Full name <span style={{ color: '#52525b', fontWeight: 'normal' }}>(optional)</span></label>
-          <input
-            className={styles.input}
-            id="name"
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        
         <div className={styles.formGroup}>
           <label className={styles.label} htmlFor="email">Email</label>
           <input
@@ -61,27 +48,27 @@ export const Register: React.FC = () => {
             required
           />
         </div>
-        
+
         <div className={styles.formGroup}>
           <label className={styles.label} htmlFor="password">Password</label>
           <input
             className={styles.input}
             id="password"
             type="password"
-            placeholder="At least 6 characters"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        
+
         <button className={styles.submitBtn} type="submit" disabled={isLoading}>
-          {isLoading ? 'Creating account...' : 'Create account'}
+          {isLoading ? 'Signing in...' : 'Sign in'}
         </button>
       </form>
-      
+
       <p className={styles.linkText}>
-        Already have an account? <Link to="/login" className={styles.link}>Log in</Link>
+        Don't have an account? <Link to="/register" className={styles.link}>Sign up</Link>
       </p>
     </div>
   );
