@@ -18,7 +18,7 @@ export const Register: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await register({ name, email, password });
+      await register({ full_name: name, email, password });
       navigate('/');
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Failed to register. Please try again.');
@@ -70,7 +70,7 @@ export const Register: React.FC = () => {
             className={styles.input}
             id="password"
             type="password"
-            placeholder="At least 6 characters"
+            placeholder="At least 8 characters"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

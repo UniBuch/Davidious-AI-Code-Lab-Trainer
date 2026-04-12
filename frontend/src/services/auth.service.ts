@@ -3,29 +3,40 @@ import type { AuthResponse, LoginCredentials, RegisterCredentials, User } from '
 
 export const authService = {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>('/auth/login', credentials);
+    const params = new URLSearchParams();
+    params.append('username', credentials.email);
+    params.append('password', credentials.password);
+
+    const response = await apiClient.post<{ access_token: string, token_type: string }>('/auth/login', params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
     if (response.data.access_token) {
       localStorage.setItem('token', response.data.access_token);
     }
-    return response.data;
+
+    const user = await this.getCurrentUser();
+    return { ...response.data, user };
   },
 
   async register(credentials: RegisterCredentials): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>('/auth/register', credentials);
+    const response = await apiClient.post<{ access_token: string, token_type: string }>('/auth/register', credentials);
     if (response.data.access_token) {
       localStorage.setItem('token', response.data.access_token);
     }
-    return response.data;
+
+    const user = await this.getCurrentUser();
+    return { ...response.data, user };
   },
 
   async logout(): Promise<void> {
     localStorage.removeItem('token');
-    // Call backend endpoint if one exists
-    // await apiClient.post('/auth/logout');
   },
 
   async getCurrentUser(): Promise<User> {
-    const response = await apiClient.get<User>('/users/me');
+    const response = await apiClient.get<User>('/auth/me');
     return response.data;
   }
 };

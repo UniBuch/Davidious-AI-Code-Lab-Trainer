@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 import bcrypt
 from jose import JWTError, jwt
 
-from config import settings
+from .config import settings
 
 ALGORITHM = "HS256"
 BCRYPT_MAX_PASSWORD_BYTES = 72

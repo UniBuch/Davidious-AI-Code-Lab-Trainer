@@ -1,10 +1,9 @@
 
-
 from fastapi import APIRouter, Depends, HTTPException
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, OAuth2PasswordRequestForm
 from sqlmodel import Session, select
 
-from database import get_session
+from database import get_db
 from models import User
 from schemas.auth import LoginIn, SignupIn, TokenOut, UserOut
 from core.security import (
@@ -31,7 +30,7 @@ def get_current_user_id(
 
 def get_current_user(
     user_id: int = Depends(get_current_user_id),
-    db: Session = Depends(get_session),
+    db: Session = Depends(get_db),
 ) -> User:
     user = db.get(User, user_id)
     if not user or not user.is_active:
@@ -39,10 +38,10 @@ def get_current_user(
     return user
 
 
-@router.post("/signup", response_model=TokenOut)
-def signup(
+@router.post("/register", response_model=TokenOut)
+def register(
     body: SignupIn,
-    db: Session = Depends(get_session),
+    db: Session = Depends(get_db),
 ) -> TokenOut:
     existing = db.exec(select(User).where(User.email == body.email)).first()
     if existing:
@@ -61,11 +60,11 @@ def signup(
 
 @router.post("/login", response_model=TokenOut)
 def login(
-    body: LoginIn,
-    db: Session = Depends(get_session),
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db),
 ) -> TokenOut:
-    user = db.exec(select(User).where(User.email == body.email)).first()
-    if not user or not verify_password(body.password, user.hashed_password):
+    user = db.exec(select(User).where(User.email == form_data.username)).first()
+    if not user or not verify_password(form_data.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     if not user.is_active:
         raise HTTPException(status_code=401, detail="Account inactive")
