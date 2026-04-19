@@ -24,3 +24,9 @@
 
 ### Project requirements for frontend are in :
 package.json
+
+### Allowed documents to upload:
+- .pdf
+- .docx
+- .txt
+- .md

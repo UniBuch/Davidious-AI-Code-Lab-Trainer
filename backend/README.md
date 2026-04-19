@@ -23,3 +23,9 @@
 
 ### Project requirements for backend are in :
 pyproject.toml
+
+### Allowed documents to upload:
+- .pdf
+- .docx
+- .txt
+- .md

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from database import create_tables
 from fastapi.middleware.cors import CORSMiddleware
-from api import auth
+from api import auth, document
 
 create_tables()
 
@@ -16,6 +16,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(document.router)
 
 if __name__ == "__main__":
     import uvicorn
