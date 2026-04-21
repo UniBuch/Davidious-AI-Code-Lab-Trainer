@@ -5,12 +5,12 @@ from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, Up
 from sqlalchemy.exc import OperationalError
 from sqlmodel import Session, select
 
-from ..database import get_db
-from ..models import Document, User
-from ..schemas.document import DocumentMetadata, DocumentUploadResponse
-from ..services.document_processing import process_document
+from database import get_db
+from models import Document, User
+from schemas.document import DocumentMetadata, DocumentUploadResponse
+from services.document_processing import process_document
 from .auth import get_current_user
-from ..core.config import settings
+from core.config import settings
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
