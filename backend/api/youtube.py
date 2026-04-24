@@ -4,12 +4,12 @@ from urllib.parse import parse_qs, urlparse
 from fastapi import APIRouter, BackgroundTasks, Depends, Form, HTTPException
 from sqlmodel import Session
 
-from ..database import get_db
-from ..models import Document, DocumentChunk, User
-from ..schemas.youtube import YouTubeIngestResponse
-from ..services.document_processing_service import process_document
-from ..services.youtube_service import fetch_transcript
-from ..routers.auth import get_current_user
+from database import get_db
+from models import Document, DocumentChunk, User
+from schemas.youtube import YouTubeIngestResponse
+from services.document_processing import process_document
+from services.youtube import fetch_transcript
+from api.auth import get_current_user
 
 
 router = APIRouter(tags=["youtube"])

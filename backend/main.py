@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from database import create_tables
 from fastapi.middleware.cors import CORSMiddleware
-from api import auth, document
+from api import auth, document, youtube
 
 create_tables()
 
@@ -17,6 +17,7 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(document.router)
+app.include_router(youtube.router)
 
 if __name__ == "__main__":
     import uvicorn

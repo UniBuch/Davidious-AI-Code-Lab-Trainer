@@ -4,7 +4,7 @@ import re
 import tiktoken
 from sqlmodel import Session
 
-from ..models.document import DocumentChunk
+from models.document import DocumentChunk
 
 MIN_CHUNK_TOKENS = 500
 MAX_CHUNK_TOKENS = 800

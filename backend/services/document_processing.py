@@ -3,11 +3,11 @@ from pathlib import Path
 
 from sqlmodel import Session, select
 
-from ..database import engine
-from ..models import Document, DocumentChunk
-from .chunking import chunk_and_store
-from .text_extraction import extract_text
-from ..core.config import settings
+from database import engine
+from models import Document, DocumentChunk
+from services.chunking import chunk_and_store
+from services.text_extraction import extract_text
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
