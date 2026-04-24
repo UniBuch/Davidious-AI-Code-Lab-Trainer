@@ -15,8 +15,26 @@ from ..routers.auth import get_current_user
 router = APIRouter(tags=["youtube"])
 
 
-def _extract_youtube_video_id(url: str) :
-    pass
+def _extract_youtube_video_id(url: str) -> str | None:
+    if not url or not url.strip():
+        return None
+    url = url.strip()
+    # youtu.be/VIDEO_ID
+    if "youtu.be/" in url:
+        match = re.search(r"youtu\.be/([a-zA-Z0-9_-]{11})", url)
+        return match.group(1) if match else None
+    # youtube.com/watch?v=VIDEO_ID or youtube.com/v/VIDEO_ID
+    parsed = urlparse(url)
+    if parsed.hostname and ("youtube.com" in parsed.hostname or "youtu.be" in parsed.hostname):
+        if parsed.path == "/watch" and parsed.query:
+            qs = parse_qs(parsed.query)
+            v = qs.get("v")
+            if v and len(v[0]) == 11:
+                return v[0]
+        if parsed.path.startswith("/v/"):
+            match = re.search(r"/v/([a-zA-Z0-9_-]{11})", parsed.path)
+            return match.group(1) if match else None
+    return None
 
 
 @router.post("/youtube", response_model=YouTubeIngestResponse)
