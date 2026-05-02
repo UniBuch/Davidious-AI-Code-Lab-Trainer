@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getLearningPaths, deleteLearningPath } from "../api/api";
 import type { LearningPathSummary } from "../types/types";
+import { sharedStyles } from "../styles/shared";
 
 function StatusBadge({ status }: { status: string }) {
     const map: Record<string, { label: string; cls: string }> = {
-        processing: { label: "Processing…", cls: "badge-processing" },
-        ready: { label: "Ready", cls: "badge-ready" },
-        error: { label: "Error", cls: "badge-error" },
+        processing: { label: "Processing…", cls: sharedStyles.badgeProcessing },
+        ready: { label: "Ready", cls: sharedStyles.badgeReady },
+        error: { label: "Error", cls: sharedStyles.badgeError },
     };
     const { label, cls } = map[status] ?? { label: status, cls: "" };
-    return <span className={`status-badge ${cls}`}>{label}</span>;
+    return <span className={`${sharedStyles.statusBadge} ${cls}`}>{label}</span>;
 }
 
 function formatDate(iso: string) {
@@ -54,49 +55,49 @@ export default function PathsListPage() {
     }
 
     return (
-        <div className="page">
-            <div className="page-header">
-                <h1>My Learning Paths</h1>
-                <Link to="/paths/new" className="btn-primary btn-sm">+ New path</Link>
+        <div className={sharedStyles.page}>
+            <div className={sharedStyles.pageHeader}>
+                <h1 className={sharedStyles.pageTitle}>My Learning Paths</h1>
+                <Link to="/paths/new" className={`${sharedStyles.btnPrimary} ${sharedStyles.btnSm}`}>+ New path</Link>
             </div>
-            <p className="muted">Each path has a personalised day-by-day roadmap generated for you.</p>
+            <p className={sharedStyles.muted}>Each path has a personalised day-by-day roadmap generated for you.</p>
 
-            {loading && <p className="muted">Loading…</p>}
-            {error && <div className="message err">{error}</div>}
+            {loading && <p className={sharedStyles.muted}>Loading…</p>}
+            {error && <div className={`${sharedStyles.message} ${sharedStyles.messageErr}`}>{error}</div>}
 
             {!loading && paths.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-icon">🗺️</div>
+                <div className={sharedStyles.emptyState}>
+                    <div className={sharedStyles.emptyIcon}>🗺️</div>
                     <p>No learning paths yet.</p>
-                    <Link to="/paths/new" className="btn-primary">Create your first path</Link>
+                    <Link to="/paths/new" className={sharedStyles.btnPrimary}>Create your first path</Link>
                 </div>
             )}
 
-            <ul className="path-list">
+            <ul className={sharedStyles.pathList}>
                 {paths.map((p) => (
-                    <li key={p.id} className="path-card">
-                        <div className="path-card-main">
-                            <div className="path-card-top">
-                                <Link to={`/paths/${p.id}`} className="path-title">{p.title}</Link>
+                    <li key={p.id} className={sharedStyles.pathCard}>
+                        <div className={sharedStyles.pathCardMain}>
+                            <div className={sharedStyles.pathCardTop}>
+                                <Link to={`/paths/${p.id}`} className={sharedStyles.pathCardTitle}>{p.title}</Link>
                                 <StatusBadge status={p.status} />
                             </div>
                             {p.description && (
-                                <p className="path-description">{p.description}</p>
+                                <p className={sharedStyles.pathDescription}>{p.description}</p>
                             )}
-                            <div className="path-meta">
+                            <div className={sharedStyles.pathMeta}>
                                 <span>⏱ {p.hours_per_day} hr/day</span>
                                 {p.total_days != null && p.total_days > 0 && (
                                     <span>📅 {p.total_days} days</span>
                                 )}
                                 <span>📄 {p.document_count} source{p.document_count !== 1 ? "s" : ""}</span>
-                                <span className="doc-date">Created {formatDate(p.created_at)}</span>
+                                <span className={sharedStyles.docDate}>Created {formatDate(p.created_at)}</span>
                             </div>
                         </div>
-                        <div className="path-card-actions">
-                            <Link to={`/paths/${p.id}`} className="btn-sm">View roadmap →</Link>
+                        <div className={sharedStyles.pathCardActions}>
+                            <Link to={`/paths/${p.id}`} className={sharedStyles.btnSm}>View roadmap →</Link>
                             <button
                                 type="button"
-                                className="btn-sm btn-danger"
+                                className={sharedStyles.btnDanger}
                                 onClick={() => handleDelete(p.id, p.title)}
                                 disabled={deleting === p.id}
                             >

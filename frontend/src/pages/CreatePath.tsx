@@ -5,6 +5,7 @@ import {
     addDocumentToPath,
     addYouTubeToPath,
 } from "../api/api";
+import { sharedStyles } from "../styles/shared";
 
 type UrlEntry = { id: number; value: string };
 
@@ -99,34 +100,35 @@ export default function CreatePathPage() {
     }
 
     return (
-        <div className="page create-path-page">
-            <h1>Create a Learning Path</h1>
-            <p className="muted">
+        <div className={`${sharedStyles.page} create-path-page`}>
+            <h1 className={sharedStyles.cpPageTitle}>Create a Learning Path</h1>
+            <p className={sharedStyles.muted}>
                 Describe what you want to learn, set your daily study time, and add your materials.
                 We'll build a personalised day-by-day roadmap for you.
             </p>
 
-            {error && <div className="message err">{error}</div>}
+            {error && <div className={`${sharedStyles.message} ${sharedStyles.messageErr}`}>{error}</div>}
 
             {submitting ? (
-                <div className="progress-panel">
-                    <div className="progress-spinner" />
-                    <ul className="progress-log">
+                <div className={sharedStyles.progressPanel}>
+                    <div className={sharedStyles.progressSpinner} />
+                    <ul className={sharedStyles.progressLog}>
                         {progress.map((line, i) => (
                             <li key={i}>{line}</li>
                         ))}
                     </ul>
                 </div>
             ) : (
-                <form className="create-path-form" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     {/* ── Path details ─────────────────────────────────── */}
-                    <section className="cp-section">
-                        <h2>Path details</h2>
+                    <section className={sharedStyles.cpSection}>
+                        <h2 className={sharedStyles.cpSectionTitle}>Path details</h2>
 
-                        <label className="cp-label">
-                            Title <span className="required">*</span>
+                        <label className={sharedStyles.cpLabel}>
+                            Title <span className={sharedStyles.required}>*</span>
                             <input
                                 type="text"
+                                className={sharedStyles.cpInput}
                                 placeholder="e.g. Machine Learning Fundamentals"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
@@ -135,9 +137,10 @@ export default function CreatePathPage() {
                             />
                         </label>
 
-                        <label className="cp-label">
+                        <label className={sharedStyles.cpLabel}>
                             What do you want to learn?
                             <textarea
+                                className={sharedStyles.cpInput}
                                 placeholder="Describe your learning goal. The AI uses this to write your day titles."
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
@@ -145,13 +148,13 @@ export default function CreatePathPage() {
                             />
                         </label>
 
-                        <div className="cp-label">
+                        <div className={sharedStyles.cpLabel}>
                             <span>
                                 Daily study time&ensp;
-                                <strong className="accent">{hoursPerDay} hour{hoursPerDay !== 1 ? "s" : ""}</strong>
+                                <strong className={sharedStyles.accent}>{hoursPerDay} hour{hoursPerDay !== 1 ? "s" : ""}</strong>
                             </span>
-                            <div className="hours-row">
-                                <span className="hours-bound">30 min</span>
+                            <div className={sharedStyles.hoursRow}>
+                                <span className={sharedStyles.hoursBound}>30 min</span>
                                 <input
                                     type="range"
                                     min={0.5}
@@ -159,26 +162,26 @@ export default function CreatePathPage() {
                                     step={0.5}
                                     value={hoursPerDay}
                                     onChange={(e) => setHoursPerDay(Number(e.target.value))}
-                                    className="hours-slider"
+                                    className={sharedStyles.hoursSlider}
                                 />
-                                <span className="hours-bound">8 hrs</span>
+                                <span className={sharedStyles.hoursBound}>8 hrs</span>
                             </div>
-                            <p className="cp-hint">
+                            <p className={sharedStyles.cpHint}>
                                 We estimate ~15 min per content chunk, so {hoursPerDay} hr/day ≈{" "}
-                                <strong>{Math.max(1, Math.round(hoursPerDay * 4))} chunks</strong> per session.
+                                <strong className="text-zinc-300">{Math.max(1, Math.round(hoursPerDay * 4))} chunks</strong> per session.
                             </p>
                         </div>
                     </section>
 
                     {/* ── Documents ─────────────────────────────────────── */}
-                    <section className="cp-section">
-                        <h2>Documents <span className="optional">(optional)</span></h2>
-                        <p className="cp-hint">PDF, DOCX, TXT, or Markdown files.</p>
+                    <section className={sharedStyles.cpSection}>
+                        <h2 className={sharedStyles.cpSectionTitle}>Documents <span className={sharedStyles.optional}>(optional)</span></h2>
+                        <p className={sharedStyles.cpHint}>PDF, DOCX, TXT, or Markdown files.</p>
 
-                        <div className="file-drop-area" onClick={() => fileInputRef.current?.click()}>
-                            <span className="file-drop-icon">📄</span>
+                        <div className={sharedStyles.fileDropArea} onClick={() => fileInputRef.current?.click()}>
+                            <span className={sharedStyles.fileDropIcon}>📄</span>
                             <span>Click to select files</span>
-                            <span className="cp-hint">or drag & drop</span>
+                            <span className={sharedStyles.cpHint}>or drag & drop</span>
                             <input
                                 ref={fileInputRef}
                                 type="file"
@@ -190,14 +193,14 @@ export default function CreatePathPage() {
                         </div>
 
                         {files.length > 0 && (
-                            <ul className="file-list">
+                            <ul className={sharedStyles.fileList}>
                                 {files.map((f, i) => (
-                                    <li key={i} className="file-item">
-                                        <span className="file-name">{f.name}</span>
-                                        <span className="file-size">{(f.size / 1024).toFixed(0)} KB</span>
+                                    <li key={i} className={sharedStyles.fileItem}>
+                                        <span className={sharedStyles.fileName}>{f.name}</span>
+                                        <span className={sharedStyles.fileSize}>{(f.size / 1024).toFixed(0)} KB</span>
                                         <button
                                             type="button"
-                                            className="file-remove"
+                                            className={sharedStyles.fileRemove}
                                             onClick={() => removeFile(i)}
                                             aria-label="Remove file"
                                         >
@@ -210,15 +213,16 @@ export default function CreatePathPage() {
                     </section>
 
                     {/* ── YouTube URLs ──────────────────────────────────── */}
-                    <section className="cp-section">
-                        <h2>YouTube URLs <span className="optional">(optional)</span></h2>
-                        <p className="cp-hint">Paste video URLs — we'll extract the transcript automatically.</p>
+                    <section className={sharedStyles.cpSection}>
+                        <h2 className={sharedStyles.cpSectionTitle}>YouTube URLs <span className={sharedStyles.optional}>(optional)</span></h2>
+                        <p className={sharedStyles.cpHint}>Paste video URLs — we'll extract the transcript automatically.</p>
 
-                        <div className="url-list">
+                        <div className={sharedStyles.urlList}>
                             {urlEntries.map((entry) => (
-                                <div key={entry.id} className="url-row">
+                                <div key={entry.id} className={sharedStyles.urlRow}>
                                     <input
                                         type="url"
+                                        className={sharedStyles.cpInput}
                                         placeholder="https://youtube.com/watch?v=…"
                                         value={entry.value}
                                         onChange={(e) => updateUrlEntry(entry.id, e.target.value)}
@@ -226,7 +230,7 @@ export default function CreatePathPage() {
                                     {urlEntries.length > 1 && (
                                         <button
                                             type="button"
-                                            className="url-remove"
+                                            className={sharedStyles.urlRemove}
                                             onClick={() => removeUrlEntry(entry.id)}
                                             aria-label="Remove URL"
                                         >
@@ -236,7 +240,7 @@ export default function CreatePathPage() {
                                 </div>
                             ))}
                         </div>
-                        <button type="button" className="btn-add-url" onClick={addUrlEntry}>
+                        <button type="button" className={sharedStyles.btnAddUrl} onClick={addUrlEntry}>
                             + Add another URL
                         </button>
                     </section>
@@ -244,13 +248,13 @@ export default function CreatePathPage() {
                     {/* ── Submit ────────────────────────────────────────── */}
                     <button
                         type="submit"
-                        className="btn-primary btn-submit"
-                        disabled={!title.trim()}
+                        className={sharedStyles.btnSubmit}
+                        disabled={!title.trim() || submitting}
                     >
                         {hasAnySources ? "Create path & start processing" : "Create path"}
                     </button>
                     {!hasAnySources && (
-                        <p className="cp-hint" style={{ marginTop: "0.5rem" }}>
+                        <p className={sharedStyles.cpHint} style={{ marginTop: "0.5rem", textAlign: "center" }}>
                             You can add documents later from the path page.
                         </p>
                     )}

@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
+import { sharedStyles } from "../styles/shared";
 
 export default function DashboardPage() {
     return (
-        <div className="page">
-            <div className="page-header">
-                <h1>Dashboard</h1>
+        <div className={sharedStyles.page}>
+            <div className={sharedStyles.pageHeader}>
+                <h1 className={sharedStyles.pageTitle}>Dashboard</h1>
             </div>
 
-            <div className="empty-state">
-                <div className="empty-icon">📊</div>
+            <div className={sharedStyles.emptyState}>
+                <div className={sharedStyles.emptyIcon}>📊</div>
                 <h2
                     style={{
                         fontSize: "1.25rem",
@@ -18,13 +19,13 @@ export default function DashboardPage() {
                 >
                     Coming soon
                 </h2>
-                <p className="muted">
+                <p className={sharedStyles.muted}>
                     Your personal dashboard with progress tracking, streaks and
                     analytics is under development.
                 </p>
                 <Link
                     to="/paths"
-                    className="btn-primary"
+                    className={sharedStyles.btnPrimary}
                     style={{ marginTop: "1rem" }}
                 >
                     Browse your paths

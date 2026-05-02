@@ -6,6 +6,7 @@ import {
     addYouTubeToPath
 } from "../api/api";
 import type { DailyPlan, LearningPathDetail } from "../types/types";
+import { sharedStyles } from "../styles/shared";
 
 function formatMinutes(mins: number) {
     if (mins < 60) return `${mins} min`;
@@ -16,12 +17,12 @@ function formatMinutes(mins: number) {
 
 function DayCard({ plan }: { plan: DailyPlan }) {
     return (
-        <div className="day-card">
-            <div className="day-number">Day {plan.day_number}</div>
-            <div className="day-body">
-                <h3 className="day-title">{plan.title}</h3>
-                {plan.description && <p className="day-description">{plan.description}</p>}
-                <div className="day-meta">
+        <div className={sharedStyles.dayCard}>
+            <div className={sharedStyles.dayNumber}>Day {plan.day_number}</div>
+            <div className={sharedStyles.dayBody}>
+                <h3 className={sharedStyles.dayTitle}>{plan.title}</h3>
+                {plan.description && <p className={sharedStyles.dayDescription}>{plan.description}</p>}
+                <div className={sharedStyles.dayMeta}>
                     <span>⏱ {formatMinutes(plan.estimated_minutes)}</span>
                     <span>📦 {plan.chunk_ids.length} section{plan.chunk_ids.length !== 1 ? "s" : ""}</span>
                 </div>
@@ -32,11 +33,11 @@ function DayCard({ plan }: { plan: DailyPlan }) {
 
 function ProcessingBanner({ totalDocs }: { totalDocs: number }) {
     return (
-        <div className="processing-banner">
-            <div className="spinner-sm" />
+        <div className={sharedStyles.processingBanner}>
+            <div className={sharedStyles.spinnerSm} />
             <div>
-                <strong>Building your roadmap…</strong>
-                <p>
+                <strong className={sharedStyles.processingBannerStrong}>Building your roadmap…</strong>
+                <p className={sharedStyles.processingBannerP}>
                     We're processing {totalDocs} source{totalDocs !== 1 ? "s" : ""}:{" "}
                     chunking, embedding, extracting concepts and generating your day-by-day plan.
                     This may take a minute. This page will refresh automatically.
@@ -139,8 +140,8 @@ export default function PathDetailPage() {
         }
     }
 
-    if (loading) return <div className="page"><p className="muted">Loading…</p></div>;
-    if (error) return <div className="page"><div className="message err">{error}</div></div>;
+    if (loading) return <div className={sharedStyles.page}><p className={sharedStyles.muted}>Loading…</p></div>;
+    if (error) return <div className={sharedStyles.page}><div className={`${sharedStyles.message} ${sharedStyles.messageErr}`}>{error}</div></div>;
     if (!path) return null;
 
     const isProcessing = path.status === "processing";
@@ -148,13 +149,13 @@ export default function PathDetailPage() {
     const totalDocs = path.daily_plans.length === 0 && isProcessing ? 1 : 0;
 
     return (
-        <div className="page path-detail-page">
+        <div className={sharedStyles.pathDetailPage}>
             {/* Header */}
-            <div className="path-detail-header">
-                <Link to="/paths" className="back-link">← My paths</Link>
-                <h1>{path.title}</h1>
-                {path.description && <p className="muted">{path.description}</p>}
-                <div className="path-detail-meta">
+            <div className={sharedStyles.pathDetailHeader}>
+                <Link to="/paths" className={sharedStyles.backLink}>← My paths</Link>
+                <h1 className={sharedStyles.pathDetailTitle}>{path.title}</h1>
+                {path.description && <p className={sharedStyles.muted}>{path.description}</p>}
+                <div className={sharedStyles.pathDetailMeta}>
                     <span>⏱ {path.hours_per_day} hr/day</span>
                     {path.total_days != null && path.total_days > 0 && (
                         <span>📅 {path.total_days}-day plan</span>
@@ -172,16 +173,16 @@ export default function PathDetailPage() {
             {/* Status banners */}
             {isProcessing && <ProcessingBanner totalDocs={totalDocs || 1} />}
             {isError && (
-                <div className="message err">
+                <div className={`${sharedStyles.message} ${sharedStyles.messageErr}`}>
                     Something went wrong while building your roadmap. Try adding your sources again.
                 </div>
             )}
 
             {/* Roadmap */}
             {path.daily_plans.length > 0 && (
-                <section className="roadmap-section">
-                    <h2 className="section-title">Your {path.total_days}-Day Roadmap</h2>
-                    <div className="day-timeline">
+                <section>
+                    <h2 className={sharedStyles.sectionTitle}>Your {path.total_days}-Day Roadmap</h2>
+                    <div className={sharedStyles.dayTimeline}>
                         {path.daily_plans.map((plan: any) => (
                             <DayCard key={plan.id} plan={plan} />
                         ))}
@@ -190,29 +191,29 @@ export default function PathDetailPage() {
             )}
 
             {!isProcessing && path.daily_plans.length === 0 && !isError && (
-                <div className="empty-state" style={{ marginTop: "2rem" }}>
-                    <div className="empty-icon">📂</div>
+                <div className={sharedStyles.emptyState} style={{ marginTop: "2rem" }}>
+                    <div className={sharedStyles.emptyIcon}>📂</div>
                     <p>No sources yet. Add a document or YouTube URL below to generate your roadmap.</p>
                 </div>
             )}
 
             {/* Add sources panel */}
-            <section className="add-source-section">
+            <section className={sharedStyles.addSourceSection}>
                 <button
                     type="button"
-                    className="btn-toggle-add"
+                    className={sharedStyles.btnToggleAdd}
                     onClick={() => setShowAddSource((v) => !v)}
                 >
                     {showAddSource ? "▲ Hide" : "＋ Add more sources"}
                 </button>
 
                 {showAddSource && (
-                    <form className="add-source-form" onSubmit={handleAddSources}>
-                        <div className="add-source-row">
-                            <label className="cp-label" style={{ flex: 1 }}>
+                    <form className={sharedStyles.addSourceForm} onSubmit={handleAddSources}>
+                        <div className={sharedStyles.addSourceRow}>
+                            <label className={sharedStyles.cpLabel} style={{ flex: 1 }}>
                                 Documents (PDF, DOCX, TXT, MD)
                                 <div
-                                    className="file-drop-area file-drop-sm"
+                                    className={`${sharedStyles.fileDropArea} ${sharedStyles.fileDropSm}`}
                                     onClick={() => fileRef.current?.click()}
                                 >
                                     <span>Click to pick files</span>
@@ -233,21 +234,22 @@ export default function PathDetailPage() {
                                     />
                                 </div>
                                 {addFiles.map((f, i) => (
-                                    <div key={i} className="file-item" style={{ marginTop: "0.25rem" }}>
-                                        <span className="file-name">{f.name}</span>
+                                    <div key={i} className={sharedStyles.fileItem} style={{ marginTop: "0.25rem" }}>
+                                        <span className={sharedStyles.fileName}>{f.name}</span>
                                         <button
                                             type="button"
-                                            className="file-remove"
+                                            className={sharedStyles.fileRemove}
                                             onClick={() => setAddFiles((prev) => prev.filter((_, j) => j !== i))}
                                         >✕</button>
                                     </div>
                                 ))}
                             </label>
 
-                            <label className="cp-label" style={{ flex: 1 }}>
+                            <label className={sharedStyles.cpLabel} style={{ flex: 1 }}>
                                 YouTube URL
                                 <input
                                     type="url"
+                                    className={sharedStyles.cpInput}
                                     placeholder="https://youtube.com/watch?v=…"
                                     value={addUrl}
                                     onChange={(e) => setAddUrl(e.target.value)}
@@ -256,12 +258,12 @@ export default function PathDetailPage() {
                         </div>
 
                         {addMsg && (
-                            <pre className="add-source-msg">{addMsg}</pre>
+                            <pre className={sharedStyles.addSourceMsg}>{addMsg}</pre>
                         )}
 
                         <button
                             type="submit"
-                            className="btn-primary"
+                            className={sharedStyles.btnSubmit}
                             disabled={addBusy || (addFiles.length === 0 && !addUrl.trim())}
                         >
                             {addBusy ? "Processing…" : "Add sources & regenerate roadmap"}
