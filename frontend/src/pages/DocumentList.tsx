@@ -10,7 +10,7 @@ export default function DocumentListPage() {
     useEffect(() => {
         getDocuments()
             .then(setDocs)
-            .catch((e) => setError(e instanceof Error ? e.message : "Failed to load"))
+            .catch((e: any) => setError(e instanceof Error ? e.message : "Failed to load"))
             .finally(() => setLoading(false));
     }, []);
 
