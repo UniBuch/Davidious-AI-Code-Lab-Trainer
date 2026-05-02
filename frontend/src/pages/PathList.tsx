@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getLearningPaths, deleteLearningPath, type LearningPathSummary } from "../api";
+import { getLearningPaths, deleteLearningPath } from "../api/api";
+import type { LearningPathSummary } from "../types/types";
 
 function StatusBadge({ status }: { status: string }) {
     const map: Record<string, { label: string; cls: string }> = {

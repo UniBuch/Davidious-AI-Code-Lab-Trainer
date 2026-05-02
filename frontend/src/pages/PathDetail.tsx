@@ -3,10 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import {
     getLearningPath,
     addDocumentToPath,
-    addYouTubeToPath,
-    type LearningPathDetail,
-    type DailyPlan,
-} from "../api";
+    addYouTubeToPath
+} from "../api/api";
+import type { DailyPlan, LearningPathDetail } from "../types/types";
 
 function formatMinutes(mins: number) {
     if (mins < 60) return `${mins} min`;

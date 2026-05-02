@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getDocuments } from "../api";
-import type { DocumentItem } from "../api";
+import { getDocuments } from "../api/api";
+import type { DocumentItem } from "../types/types";
 
 export default function DocumentListPage() {
     const [docs, setDocs] = useState<DocumentItem[]>([]);
