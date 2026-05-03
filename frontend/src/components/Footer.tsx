@@ -48,7 +48,7 @@ export default function Footer() {
                     {/* Column 1 */}
                     <div className="flex flex-col gap-3">
                         <h3 className="font-semibold text-sm text-[var(--color-text)] mb-2">Products</h3>
-                        <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Code Lab</a>
+                        <Link to="/codelab" className="text-sm hover:text-[var(--color-text)] transition-colors">Code Lab</Link>
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Training Paths</a>
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Analytics</a>
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Team Features</a>

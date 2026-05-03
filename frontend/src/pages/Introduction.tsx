@@ -28,9 +28,9 @@ export const IntroductionPage: React.FC = () => {
           </div>
           
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
-            Master AI Coding <br className="hidden sm:block" />
+            Welcome to <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-blue-500 to-emerald-500 bg-[length:200%_auto] animate-gradient">
-              Without Limits
+              AI Code Lab Trainer
             </span>
           </h1>
           

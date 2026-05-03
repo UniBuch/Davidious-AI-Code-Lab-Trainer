@@ -8,6 +8,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Home } from './pages/Home';
 import { IntroductionPage } from './pages/Introduction';
+import { CodeLabPage } from './pages/CodeLab';
 import DashboardPage from "./pages/Dashboard";
 import PathListPage from "./pages/PathList";
 import PathDetailPage from "./pages/PathDetail";
@@ -30,6 +31,7 @@ function App() {
 
               <Route element={<ProtectedRoute />}>
                 <Route path="/home" element={<Home />} />
+                <Route path="/codelab" element={<CodeLabPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/paths" element={<PathListPage />} />
                 <Route path="/paths/new" element={<CreatePathPage />} />
