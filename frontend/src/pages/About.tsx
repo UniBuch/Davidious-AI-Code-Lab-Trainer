@@ -28,11 +28,21 @@ export function AboutPage() {
                 <div className="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] shadow-lg text-center mt-8">
                     <h2 className="text-3xl font-bold mb-6">Meet the Team</h2>
                     <p className="text-[var(--color-text-secondary)] mb-6">We are a passionate team of developers, designers, and AI enthusiasts dedicated to making code education better.</p>
-                    <div className="flex justify-center gap-4 flex-wrap">
+                    <div className="flex justify-center gap-12 flex-wrap mt-4">
                         <div className="flex flex-col items-center p-4">
-                            <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-emerald-400 to-blue-500 mb-4 shadow-md flex items-center justify-center text-white text-2xl font-bold">D</div>
-                            <span className="font-semibold text-lg">David</span>
-                            <span className="text-sm text-[var(--color-text-secondary)]">Founder</span>
+                            <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-emerald-400 to-blue-500 mb-4 shadow-md flex items-center justify-center text-white text-3xl font-bold">D</div>
+                            <span className="font-semibold text-xl">Davut</span>
+                            <span className="text-sm text-[var(--color-text-secondary)]">Co-Founder</span>
+                        </div>
+                        <div className="flex flex-col items-center p-4">
+                            <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 mb-4 shadow-md flex items-center justify-center text-white text-3xl font-bold">A</div>
+                            <span className="font-semibold text-xl">Aylar</span>
+                            <span className="text-sm text-[var(--color-text-secondary)]">Co-Founder</span>
+                        </div>
+                        <div className="flex flex-col items-center p-4">
+                            <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 mb-4 shadow-md flex items-center justify-center text-white text-3xl font-bold">Y</div>
+                            <span className="font-semibold text-xl">Yunus</span>
+                            <span className="text-sm text-[var(--color-text-secondary)]">Co-Founder</span>
                         </div>
                     </div>
                 </div>

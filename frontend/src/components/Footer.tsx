@@ -77,7 +77,7 @@ export default function Footer() {
                         <h3 className="font-semibold text-sm text-[var(--color-text)] mb-2">Company</h3>
                         <Link to="/about" className="text-sm hover:text-[var(--color-text)] transition-colors">About Us</Link>
                         <Link to="/careers" className="text-sm hover:text-[var(--color-text)] transition-colors">Careers</Link>
-                        <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Contact</a>
+                        <Link to="/contact" className="text-sm hover:text-[var(--color-text)] transition-colors">Contact</Link>
                     </div>
                 </div>
             </div>
