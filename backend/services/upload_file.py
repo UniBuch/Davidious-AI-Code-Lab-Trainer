@@ -1,10 +1,10 @@
 import uuid
 from pathlib import Path
 from fastapi import HTTPException, BackgroundTasks, UploadFile
-from core.config import settings
+from sqlmodel import Session
 
-from database import get_db
-from models import Document, User
+from core.config import settings
+from models import Document
 from schemas.document import DocumentMetadata, DocumentUploadResponse
 from services.document_processing import process_document
 
@@ -32,7 +32,7 @@ def _validate_file(filename: str, content_type: str | None) -> None:
         pass
 
 
-def upload_file(file:UploadFile,user_id:int,db:Session,background_tasks:BackgroundTasks)->str:
+def upload_file(file:UploadFile,user_id:int,db:Session,background_tasks:BackgroundTasks):
     
     _validate_file(file.filename or "", file.content_type)
 
@@ -43,7 +43,7 @@ def upload_file(file:UploadFile,user_id:int,db:Session,background_tasks:Backgrou
     suffix = Path(file.filename or "file").suffix.lower()
     unique_name = f"{uuid.uuid4().hex}{suffix}"
     file_path = user_dir / unique_name
-    source_rel = f"documents/{current_user.id}/{unique_name}"
+    source_rel = f"documents/{user_id}/{unique_name}"
 
     try:
         contents = file.file.read()
@@ -57,7 +57,7 @@ def upload_file(file:UploadFile,user_id:int,db:Session,background_tasks:Backgrou
         title = title[:509] + "..."
 
     doc = Document(
-        user_id=current_user.id,
+        user_id=user_id,
         title=title,
         source=source_rel,
     )
