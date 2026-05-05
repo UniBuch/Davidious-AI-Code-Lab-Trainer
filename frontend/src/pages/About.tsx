@@ -8,7 +8,7 @@ export function AboutPage() {
                     <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">About Us</h1>
                     <p className="text-xl text-[var(--color-text-secondary)]">Discover the story behind Davidious AI Code Lab Trainer.</p>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <h2 className="text-2xl font-bold mb-4 text-emerald-400">Our Mission</h2>

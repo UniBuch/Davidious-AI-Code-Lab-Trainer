@@ -6,7 +6,7 @@ export function ContactPage() {
             <div className="max-w-3xl w-full flex flex-col gap-8 text-center">
                 <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">Contact Us</h1>
                 <p className="text-xl text-[var(--color-text-secondary)]">We'd love to hear from you. Get in touch with our team.</p>
-                
+
                 <div className="mt-8 p-12 rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] shadow-2xl transition-shadow duration-300 flex flex-col items-center gap-6 hover:shadow-[0_20px_50px_rgba(52,211,153,0.1)]">
                     <div className="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-500 dark:text-emerald-400 shadow-inner">
                         <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
@@ -18,8 +18,8 @@ export function ContactPage() {
                         Have a question about Davidious? Need help getting started? Call our founders and we'll be happy to assist you!
                     </p>
                     <div className="mt-4 p-6 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 w-full max-w-sm">
-                        <a href="tel:+40757480815" className="text-4xl font-black bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent hover:scale-110 transition-transform duration-300 inline-block">
-                            +40 757 480 815
+                        <a href="tel:+40771027429" className="text-4xl font-black bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent hover:scale-110 transition-transform duration-300 inline-block">
+                            +40 771 027 429
                         </a>
                     </div>
                 </div>
