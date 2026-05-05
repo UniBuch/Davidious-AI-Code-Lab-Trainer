@@ -14,6 +14,7 @@ import PathListPage from "./pages/PathList";
 import PathDetailPage from "./pages/PathDetail";
 import UploadPage from "./pages/Upload";
 import CreatePathPage from "./pages/CreatePath";
+import { CareersPage } from './pages/Careers';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<IntroductionPage />} />
+              <Route path="/careers" element={<CareersPage />} />
 
               <Route element={<AuthLayout />}>
                 <Route path="/login" element={<Login />} />

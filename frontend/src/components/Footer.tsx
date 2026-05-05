@@ -76,7 +76,7 @@ export default function Footer() {
                     <div className="flex flex-col gap-3">
                         <h3 className="font-semibold text-sm text-[var(--color-text)] mb-2">Company</h3>
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">About Us</a>
-                        <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Careers</a>
+                        <Link to="/careers" className="text-sm hover:text-[var(--color-text)] transition-colors">Careers</Link>
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Contact</a>
                     </div>
                 </div>
