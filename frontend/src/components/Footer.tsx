@@ -69,7 +69,7 @@ export default function Footer() {
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Privacy Policy</a>
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Terms of Service</a>
                         <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Security</a>
-                        <a href="#" className="text-sm hover:text-[var(--color-text)] transition-colors">Report Issue</a>
+                        <Link to="/support" className="text-sm hover:text-[var(--color-text)] transition-colors">Report Issue</Link>
                     </div>
                     
                     {/* Column 4 */}
