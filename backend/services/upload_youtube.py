@@ -32,7 +32,7 @@ def _extract_youtube_video_id(url: str) -> str | None:
     return None
 
 
-def upload_youtube(youtube_url: str, user_id: int, db: Session, background_tasks: BackgroundTasks):
+def upload_youtube(youtube_url: str, user_id: int, path_id: int, db: Session, background_tasks: BackgroundTasks):
     video_id = _extract_youtube_video_id(youtube_url)
     if not video_id:
         raise HTTPException(status_code=400, detail="Invalid YouTube URL")
@@ -50,11 +50,26 @@ def upload_youtube(youtube_url: str, user_id: int, db: Session, background_tasks
     source = f"https://www.youtube.com/watch?v={video_id}"
 
     doc = Document(
-        user_id=current_user.id,
+        user_id=user_id,
+        learning_path_id=path_id,
         title=title,
         source=source,
     )
     db.add(doc)
+    db.commit()
+    db.refresh(doc)
+
+    chunk = DocumentChunk(
+        document_id=doc.id,
+        content=full_text,
+        chunk_index=0,
+    )
+    db.add(chunk)
+    db.commit()
+
+    background_tasks.add_task(process_document, doc.id)
+
+    return YouTubeIngestResponse(document_id=doc.id)
     db.commit()
     db.refresh(doc)
 
