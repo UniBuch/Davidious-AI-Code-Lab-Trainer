@@ -7,11 +7,15 @@ import Layout from './components/Layout';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Home } from './pages/Home';
+import { IntroductionPage } from './pages/Introduction';
+import { CodeLabPage } from './pages/CodeLab';
 import DashboardPage from "./pages/Dashboard";
 import PathListPage from "./pages/PathList";
 import PathDetailPage from "./pages/PathDetail";
 import UploadPage from "./pages/Upload";
 import CreatePathPage from "./pages/CreatePath";
+import { CareersPage } from './pages/Careers';
+import { SupportPage } from './pages/Support';
 
 function App() {
   return (
@@ -20,6 +24,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
+              <Route path="/" element={<IntroductionPage />} />
+              <Route path="/careers" element={<CareersPage />} />
+              <Route path="/support" element={<SupportPage />} />
 
               <Route element={<AuthLayout />}>
                 <Route path="/login" element={<Login />} />
@@ -27,7 +34,8 @@ function App() {
               </Route>
 
               <Route element={<ProtectedRoute />}>
-                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/codelab" element={<CodeLabPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/paths" element={<PathListPage />} />
                 <Route path="/paths/new" element={<CreatePathPage />} />

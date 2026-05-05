@@ -1,7 +1,7 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
-
+import Footer from "./Footer";
 function SunIcon() {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -122,6 +122,7 @@ export default function Layout() {
             <main className="flex-1 flex flex-col">
                 <Outlet />
             </main>
+            <Footer />
         </div>
     );
 }
